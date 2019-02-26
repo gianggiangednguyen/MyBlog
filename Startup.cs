@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -35,6 +36,10 @@ namespace MyBlog
 
             services.AddDbContext<MyBlogDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("MainDatabase")));
+
+            services.AddAuthorization(options =>
+                options.AddPolicy("AdminRole", policy =>
+                    policy.RequireClaim(ClaimTypes.Role, "Admin")));
 
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_2);
         }
