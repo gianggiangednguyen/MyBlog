@@ -47,9 +47,10 @@ namespace MyBlog.Controllers
 
             if (acc != null)
             {
-                var claims = new List<Claim>()
+                var claims = new List<Claim>
                 {
                     new Claim(ClaimTypes.Email, acc.Email),
+                    new Claim(ClaimTypes.Sid, acc.UserId),
                     new Claim(ClaimTypes.Role, "Admin")
                 };
 

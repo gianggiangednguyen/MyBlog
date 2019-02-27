@@ -67,7 +67,7 @@
                         <li class="topbar-divider d-none d-sm-block"></li>
                         <!-- Nav Item - User Information -->
                         <li class="nav-item dropdown no-arrow">
-                            @await Component.InvokeAsync("")
+                            @await Component.InvokeAsync("UserDetail")
                             <!-- Dropdown - User Information -->
                             <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in" aria-labelledby="userDropdown">
                                 <a class="dropdown-item" asp-action="Logout" asp-controller="Admin">
