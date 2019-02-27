@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.Mvc;
-using MyBlog.Models;
-using Microsoft.EntityFrameworkCore;
 using System.Security.Claims;
+using System.Threading.Tasks;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using MyBlog.Models;
 
 namespace MyBlog.Controllers
 {
@@ -23,15 +23,24 @@ namespace MyBlog.Controllers
 
         public IActionResult Index()
         {
-            return View();
+            if (!HttpContext.User.Claims.Any())
+            {
+                return View("Login");
+            }
+
+            return View("Admin/Index");
         }
-       
+
+        [Route("Admin")]
+        [Route("Admin/Login")]
         public IActionResult Login()
         {
             return View();
         }
 
         [HttpPost]
+        [Route("Admin")]
+        [Route("Admin/Login")]
         public async Task<IActionResult> Login(string email, string password)
         {
             Users acc = await AccountCheck(email, password);
@@ -49,7 +58,7 @@ namespace MyBlog.Controllers
                 await HttpContext.SignInAsync(principal);
             }
 
-            return View();
+            return View("Index");
         }
 
         public async Task<IActionResult> Logout()

@@ -12,6 +12,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using MyBlog.Models;
+using Microsoft.AspNetCore.Authentication.Cookies;
 
 namespace MyBlog
 {
@@ -36,6 +37,8 @@ namespace MyBlog
 
             services.AddDbContext<MyBlogDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("MainDatabase")));
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
 
             services.AddAuthorization(options =>
                 options.AddPolicy("AdminRole", policy =>

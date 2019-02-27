@@ -28,16 +28,14 @@
                         <div class="row">
                             <div class="col-lg-8">
                                 <div class="p-5">
-                                    <form method="post">
+                                    <form method="post" asp-controller="Admin" asp-action="Login">
                                         <div class="form-group">
                                             <input type="text" class="form-control form-control-user" name="email" placeholder="Tài khoản...">
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user" name="password" placeholder="Mật khẩu...">
                                         </div>
-                                        <div class="form-group">
-                                        </div>
-                                        <button asp-action="Login" asp-controller="Admin" type="submit" class="btn btn-primary btn-user btn-block">Đăng nhập</button>
+                                        <button type="submit" class="btn btn-primary btn-user btn-block">Đăng nhập</button>
                                     </form>
                                 </div>
                             </div>
